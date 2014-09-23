@@ -3,7 +3,7 @@
 # Causes an error if we try and which something that doesn't exist so use this
 # as a workaround.
 - name: check to see if pip is already installed
-  command: "pip --version"
+  command: "{{ pip }} --version"
   ignore_errors: true
   register: pip_is_installed
 
@@ -12,7 +12,7 @@
   when: pip_is_installed.rc != 0
 
 - name: install pip
-  command: python {{ pip_download_dest }}/get-pip.py
+  command: "{{ python }} {{ pip_download_dest }}/get-pip.py"
   sudo: yes
   when: pip_is_installed.rc != 0
 
@@ -23,11 +23,11 @@
 # $ pip --version
 # pip 1.5.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)
 - name: check to see if pip is installed at the correct version
-  shell: "pip --version | awk '{print $2}'"
+  shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
   when: pip_version != None
 
 - name: install required version of pip
-  command: pip install pip=={{ pip_version }}
+  command: "{{ pip }} install pip=={{ pip_version }}"
   sudo: yes
   when: pip_version != None and pip_installed_version.stdout != pip_version
