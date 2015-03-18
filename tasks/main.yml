@@ -28,9 +28,16 @@
   shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
   changed_when: false
-  when: pip_version != None
+  when: pip_version != None or pip_version != "LATEST"
 
 - name: install required version of pip
   command: "{{ pip }} install pip=={{ pip_version }}"
   sudo: yes
-  when: pip_version != None and pip_installed_version.stdout != pip_version
+  when: pip_version != None and pip_installed_version.stdout != pip_version and pip_version != "LATEST"
+
+- name: Upgrade to latest version of pip
+  command: "{{ pip }} install -U pip"
+  register: pip_latest_output
+  sudo: yes
+  changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
+  when: pip_version == None or pip_version == "LATEST"
