@@ -5,6 +5,7 @@
 - name: check to see if pip is already installed
   command: "{{ pip }} --version"
   ignore_errors: true
+  changed_when: false
   register: pip_is_installed
 
 - name: download pip
@@ -25,6 +26,7 @@
 - name: check to see if pip is installed at the correct version
   shell: "{{ pip }} --version | awk '{print $2}'"
   register: pip_installed_version
+  changed_when: false
   when: pip_version != None
 
 - name: install required version of pip
