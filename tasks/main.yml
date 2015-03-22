@@ -9,7 +9,7 @@
   register: pip_is_installed
 
 - name: download pip
-  get_url: url=https://raw.github.com/pypa/pip/master/contrib/get-pip.py dest={{ pip_download_dest }}
+  get_url: url=https://bootstrap.pypa.io/get-pip.py dest={{ pip_download_dest }}
   when: pip_is_installed.rc != 0
 
 - name: install pip
