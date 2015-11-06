@@ -33,7 +33,7 @@
 - name: Install required version of pip.
   command: "{{ pip }} install pip=={{ pip_version }}"
   sudo: yes
-  when: pip_version != None and pip_installed_version.stdout != pip_version and pip_version != "LATEST"
+  when: pip_version != None and pip_installed_version.stdout != pip_version and "{{ pip_version | lower}}" != "latest"
 
 - name: Upgrade to latest version of pip.
   command: "{{ pip }} install -U pip"
