@@ -7,7 +7,6 @@
   ignore_errors: true
   changed_when: false
   register: pip_is_installed
-  changed_when: false
 
 - name: Download pip.
   get_url: url=https://bootstrap.pypa.io/get-pip.py dest={{ pip_download_dest }}
