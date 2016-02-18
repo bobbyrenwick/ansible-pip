@@ -14,7 +14,7 @@
 
 - name: Install pip.
   command: "{{ python }} {{ pip_download_dest }}/get-pip.py"
-  sudo: yes
+  become: yes
   when: pip_is_installed.rc != 0
 
 - name: Delete get-pip.py.
@@ -31,12 +31,12 @@
 
 - name: Install required version of pip.
   command: "{{ pip }} install pip=={{ pip_version }}"
-  sudo: yes
+  become: yes
   when: pip_version != None and pip_installed_version.stdout != pip_version and "{{ pip_version | lower}}" != "latest"
 
 - name: Upgrade to latest version of pip.
   command: "{{ pip }} install -U pip"
   register: pip_latest_output
-  sudo: yes
+  become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
   when: pip_version == None or pip_version == "LATEST"
