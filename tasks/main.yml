@@ -14,9 +14,14 @@
   when: pip_is_installed.rc != 0
 
 - name: Install pip.
-  command: '{{ python }} {{ pip_download_dest }}/get-pip.py{{ --proxy="pip_proxy"}}'
+  command: "{{ python }} {{ pip_download_dest }}/get-pip.py"
   become: yes
-  when: pip_is_installed.rc != 0
+  when: pip_is_installed.rc != 0 and pip_proxy == ''
+
+- name: Install pip with proxy.
+  command: "{{ python }} {{ pip_download_dest }}/get-pip.py --proxy='{{ pip_proxy }}'"
+  become: yes
+  when: pip_is_installed.rc != 0 and pip_proxy != ''
 
 - name: Delete get-pip.py.
   file: state=absent path={{ pip_download_dest }}/get-pip.py
@@ -41,4 +46,11 @@
   register: pip_latest_output
   become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
-  when: pip_version == None or pip_version == "LATEST"
+  when: (pip_version == None or pip_version == "LATEST") and pip_proxy == ''
+
+- name: Upgrade to latest version with proxy of pip.
+  command: "{{ pip }} --proxy='{{ pip_proxy }}' install -U pip"
+  register: pip_latest_output
+  become: yes
+  changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
+  when: (pip_version == None or pip_version == "LATEST") and pip_proxy != ''
