@@ -4,3 +4,4 @@ pip_download_dest: /tmp
 pip_version:
 python: python
 pip: pip
+pip_proxy: ''
