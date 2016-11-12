@@ -14,7 +14,7 @@
   when: pip_is_installed.rc != 0
 
 - name: Install pip.
-  command: "{{ python }} {{ pip_download_dest }}/get-pip.py"
+  command: '{{ python }} {{ pip_download_dest }}/get-pip.py{{ --proxy="pip_proxy"}}'
   become: yes
   when: pip_is_installed.rc != 0
 
