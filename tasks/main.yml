@@ -14,7 +14,7 @@
   when: pip_is_installed.rc != 0
 
 - name: Install pip.
-  command: "{{ python }} {{ pip_download_dest }}/get-pip.py"
+  command: "{{ python }} {{ pip_download_dest }}/get-pip.py{{ ' --proxy=' + pip_proxy if pip_proxy != '' else '' }}"
   become: yes
   when: pip_is_installed.rc != 0
 
@@ -37,8 +37,8 @@
   when: pip_version != None and pip_installed_version.stdout != pip_version and "{{ pip_version | lower}}" != "latest"
 
 - name: Upgrade to latest version of pip.
-  command: "{{ pip }} install -U pip"
+  command: "{{ pip }} {{ '--proxy=' + pip_proxy + ' ' if pip_proxy != '' else '' }}install -U pip"
   register: pip_latest_output
   become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
-  when: pip_version == None or pip_version == "LATEST"
+  when: (pip_version == None or pip_version == "LATEST")
