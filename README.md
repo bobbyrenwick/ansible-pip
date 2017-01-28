@@ -14,3 +14,4 @@ Role Variables
   - Can be set explicitly to `"LATEST"` or `"latest"` to force upgrade to the latest available version (same behaviour as `None`).
 - `python` specifies what Python executable to use.  Defaults to `python`.
 - `pip` specifies what pip executable to check and use.  Defaults to `pip`.
+- `pip_proxy` specifies a HTTP proxy, if you have to use it (e.g. behind firewall). Default is `` to skip it.
