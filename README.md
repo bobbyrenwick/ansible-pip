@@ -4,6 +4,8 @@ ansible-pip
 An ansible role that ensures pip is installed at the version you specify.
 It uses `get-pip.py` to install pip.
 
+See role in [ansible-galaxy](https://galaxy.ansible.com/bobbyrenwick/pip/)
+
 Role Variables
 --------------
 
