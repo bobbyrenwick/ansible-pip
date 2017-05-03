@@ -29,16 +29,16 @@
   register: pip_installed_version
   changed_when: false
   check_mode: no
-  when: pip_version != None or pip_version != "LATEST"
+  when: pip_version or (pip_version | lower) != "latest"
 
 - name: Install required version of pip.
   command: "{{ pip }} install pip=={{ pip_version }}"
   become: yes
-  when: pip_version != None and pip_installed_version.stdout != pip_version and "{{ pip_version | lower}}" != "latest"
+  when: pip_version and pip_installed_version.stdout != pip_version and (pip_version | lower) != "latest"
 
 - name: Upgrade to latest version of pip.
   command: "{{ pip }} {{ '--proxy=' + pip_proxy + ' ' if pip_proxy != '' else '' }}install -U pip"
   register: pip_latest_output
   become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
-  when: (pip_version == None or pip_version == "LATEST")
+  when: not pip_version or (pip_version | lower) == "latest"
