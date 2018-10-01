@@ -4,7 +4,7 @@ ansible-pip
 An ansible role that ensures pip is installed at the version you specify.
 It uses `get-pip.py` to install pip.
 
-See role in [ansible-galaxy](https://galaxy.ansible.com/bobbyrenwick/pip/)
+See role in [ansible-galaxy](https://galaxy.ansible.com/bobbyrenwick/pip/) and on [github](https://github.com/bobbyrenwick/ansible-pip)
 
 Role Variables
 --------------
@@ -17,3 +17,18 @@ Role Variables
 - `python` specifies what Python executable to use.  Defaults to `python`.
 - `pip` specifies what pip executable to check and use.  Defaults to `pip`.
 - `pip_proxy` specifies a HTTP proxy, if you have to use it (e.g. behind firewall). Default is `` to skip it.
+
+Contributors
+------------
+Thanks to everyone who has contributed! (github account listed in parentheses).
+
+- Bob Renwick (@bobbyrenwick)
+- George Macon (@gmacon)
+- Michal Gasek (@michalgasek)
+- Joe Schaul (@jschaul)
+- Conor Schaefer (@conorsch)
+- Anton Belonovich (@binary-data)
+- Anton Bormotov (@antonbormotov)
+- Alexander Meindl (@alexandermeindl)
+- Gilad Peleg (@pgilad)
+- Jacob Floyd (@cognifloyd)
