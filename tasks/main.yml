@@ -5,7 +5,7 @@
 - name: Check to see if pip is already installed.
   command: "{{ pip }} --version"
   ignore_errors: true
-  changed_when: false # read-only task
+  changed_when: false   # read-only task
   check_mode: no
   register: pip_is_installed
 
@@ -16,7 +16,7 @@
   when: pip_is_installed.rc != 0
 
 - name: Install pip.
-  command: "{{ python }} {{ pip_download_dest }}/get-pip.py{{ ' --proxy=' + pip_proxy if pip_proxy != '' else '' }}"
+  command: "{{ python }} {{ pip_download_dest }}/get-pip.py{{ ' --proxy=' + pip_proxy if pip_proxy else '' }}"
   become: yes
   when: pip_is_installed.rc != 0
 
@@ -30,6 +30,7 @@
 # pip 1.5.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)
 - name: Check to see if pip is installed at the correct version.
   shell: "{{ pip }} --version | awk '{print $2}'"
+  pipefail: true
   register: pip_installed_version
   changed_when: false
   check_mode: no
@@ -41,7 +42,7 @@
   when: pip_version and pip_installed_version.stdout is version_compare(pip_version, '!=') and (pip_version | lower) != "latest"
 
 - name: Upgrade to latest version of pip.
-  command: "{{ pip }} {{ '--proxy=' + pip_proxy + ' ' if pip_proxy != '' else '' }}install -U pip"
+  command: "{{ pip }} {{ '--proxy=' + pip_proxy + ' ' if pip_proxy else '' }}install -U pip"
   register: pip_latest_output
   become: yes
   changed_when: pip_latest_output.stdout.find('Requirement already up-to-date') == -1
