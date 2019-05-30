@@ -30,7 +30,6 @@
 # pip 1.5.2 from /usr/local/lib/python2.7/dist-packages (python 2.7)
 - name: Check to see if pip is installed at the correct version.
   shell: "{{ pip }} --version | awk '{print $2}'"
-  pipefail: true
   register: pip_installed_version
   changed_when: false
   check_mode: no
