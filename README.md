@@ -22,6 +22,7 @@ Role Variables
 
 Contributors
 ------------
+
 Thanks to everyone who has contributed! (github account listed in parentheses).
 
 - Bob Renwick (@bobbyrenwick)
@@ -34,3 +35,4 @@ Thanks to everyone who has contributed! (github account listed in parentheses).
 - Alexander Meindl (@alexandermeindl)
 - Gilad Peleg (@pgilad)
 - Jacob Floyd (@cognifloyd)
+- Evan Laske (@elaske)
