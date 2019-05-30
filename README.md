@@ -1,6 +1,8 @@
 ansible-pip
 ===========
 
+[![Build Status](https://travis-ci.com/elaske/ansible-pip.svg?branch=master)](https://travis-ci.com/elaske/ansible-pip)
+
 An ansible role that ensures pip is installed at the version you specify.
 It uses `get-pip.py` to install pip.
 

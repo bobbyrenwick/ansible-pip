@@ -7,6 +7,11 @@ services:
   - docker
 install:
   - pip install molecule docker
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+  - mv ansible-pip bobbyrenwick.pip
+  - cd bobbyrenwick.pip
 script:
   - molecule --version
   - ansible --version
