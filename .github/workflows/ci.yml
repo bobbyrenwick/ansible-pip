@@ -36,10 +36,16 @@ jobs:
         distro:
           # - centos8
           - centos7
+          - centos6
+          - fedora33
+          - fedora32
+          - fedora31
           - ubuntu2004
           - ubuntu1804
+          - ubuntu1604
           - debian10
           - debian9
+          - debian8
 
     steps:
       - name: Check out the codebase.
