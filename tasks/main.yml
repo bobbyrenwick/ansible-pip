@@ -46,5 +46,5 @@
   command: "{{ pip }} install -U pip {{ '--proxy=' + pip_proxy if pip_proxy else '' }}"
   register: pip_latest_output
   become: true
-  changed_when: pip_latest_output.stdout.find('Attempting uninstall') != -1
+  changed_when: "'stdout' in pip_latest_output and pip_latest_output.stdout.find('Attempting uninstall') != -1"
   when: not pip_version or (pip_version | lower) == "latest"
