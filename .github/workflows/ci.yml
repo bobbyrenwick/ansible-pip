@@ -34,7 +34,7 @@ jobs:
     strategy:
       matrix:
         distro:
-          # - centos8
+          - centos8
           - centos7
           - centos6
           - fedora33
