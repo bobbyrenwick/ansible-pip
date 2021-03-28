@@ -43,7 +43,7 @@
   when: pip_version and pip_installed_version.stdout is version_compare(pip_version, '!=') and (pip_version | lower) != "latest"
 
 - name: Upgrade to latest version of pip.
-  command: "{{ pip }} install -U pip {{ '--proxy=' + pip_proxy if pip_proxy else '' }}"
+  command: "{{ pip }} install -U pip{{ pip_upgrade_contraint }} {{ '--proxy=' + pip_proxy if pip_proxy else '' }}"
   register: pip_latest_output
   become: true
   changed_when: "'stdout' in pip_latest_output and pip_latest_output.stdout.find('Attempting uninstall') != -1"
