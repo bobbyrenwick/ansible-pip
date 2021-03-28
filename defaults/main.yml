@@ -8,9 +8,8 @@ pip_proxy: ''
 
 python_version: "{{ ansible_python.version_info[:3]|join('.') }}"
 python_minor: "{{ ansible_python.version_info[:2]|join('.') }}"
-pip_download_version: "{{ python_version is version_compare('3.0', '<') | ternary( python_version, '3.5') }}"
+pip_download_version: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( python_version, '3.5') }}"
 pip_download_url: "https://bootstrap.pypa.io/pip/{{ pip_download_version }}/get-pip.py"
-pip_max_version:
-  "2.6": "10"
-  "2.7": "21"
-pip_upgrade_contraint: "{{ python_version is version_compare('3.0', '<') | ternary( '<' + pip_max_version[python_minor], '' ) }}"
+pip_max_version2: "{{ ( python_minor == '2.6' ) | ternary( '10', '21' ) }}"
+pip_max_version: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( pip_max_version2, '' ) }}"
+pip_upgrade_contraint: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( '<' + pip_max_version, '' ) }}"
