@@ -1,6 +1,8 @@
+---
 skip_list:
   # Skip the pipefail rule (306) due to controversy / there-be-dragons
   # https://github.com/ansible/ansible-lint/issues/497
   # https://github.com/ansible/ansible/issues/12903
-  - '306'
-  - '106'
+  - risky-shell-pipe
+  - role-name
+  - yaml
