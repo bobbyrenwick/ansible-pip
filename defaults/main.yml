@@ -6,6 +6,10 @@ python: "{{ ansible_python_interpreter | default( ansible_python.executable | de
 pip: "{{ ( ansible_python.version_info[0] == 3 ) | ternary('pip3', 'pip') }}"
 pip_proxy: ''
 
-pip_download_url_current: https://bootstrap.pypa.io/pip/3.5/get-pip.py
-pip_download_url_py26: https://bootstrap.pypa.io/pip/2.6/get-pip.py
-pip_download_url: "{{ ansible_python.version_info[:3]|join('.') is version_compare('2.7', '>=') | ternary( pip_download_url_current, pip_download_url_py26 ) }}"
+python_version: "{{ ansible_python.version_info[:3]|join('.') }}"
+python_minor: "{{ ansible_python.version_info[:2]|join('.') }}"
+pip_download_version: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( python_minor, '3.5') }}"
+pip_download_url: "https://bootstrap.pypa.io/pip/{{ pip_download_version }}/get-pip.py"
+pip_max_version2: "{{ ( python_minor == '2.6' ) | ternary( '10', '21' ) }}"
+pip_max_version: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( pip_max_version2, '' ) }}"
+pip_upgrade_contraint: "{{ ( python_version is version_compare('3.0', '<') ) | ternary( '<' + pip_max_version, '' ) }}"
