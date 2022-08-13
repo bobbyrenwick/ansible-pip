@@ -35,18 +35,18 @@ jobs:
       fail-fast: false
       matrix:
         distro:
-          - centos8
+          - rockylinux9
+          - rockylinux8
           - centos7
-          - centos6
-          - fedora33
-          - fedora32
-          - fedora31
+          - fedora36
+          - fedora35
+          - fedora34
+          - ubuntu2204
           - ubuntu2004
           - ubuntu1804
-          - ubuntu1604
+          - debian11
           - debian10
           - debian9
-          - debian8
 
     steps:
       - name: Check out the codebase.
