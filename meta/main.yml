@@ -3,7 +3,7 @@ galaxy_info:
   author: bobbyrenwick
   description: An ansible role that ensures pip is installed at the version you specify.
   license: WTFPL
-  min_ansible_version: 1.9
+  min_ansible_version: "1.9"
 
   platforms:
     - name: EL
