@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.x'
 
@@ -35,30 +35,28 @@ jobs:
       fail-fast: false
       matrix:
         distro:
+          - rockylinux10
           - rockylinux9
-          - rockylinux8
-          - centos7
-          - fedora36
-          - fedora35
-          - fedora34
+          # - fedora43
+          - fedora42
+          - fedora41
+          # - ubuntu2404
           - ubuntu2204
-          - ubuntu2004
-          - ubuntu1804
+          # - debian13
+          - debian12
           - debian11
-          - debian10
-          - debian9
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule[docker,lint,test]
+        run: pip3 install ansible molecule molecule-plugins[docker]
 
       - name: Run Molecule tests.
         run: molecule test

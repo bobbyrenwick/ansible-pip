@@ -32,3 +32,4 @@ Thanks to everyone who has contributed! (github account listed in parentheses).
 - Alexander Meindl (@alexandermeindl)
 - Gilad Peleg (@pgilad)
 - Jacob Floyd (@cognifloyd)
+- Nicola Musatti (@nmusatti)

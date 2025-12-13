@@ -3,3 +3,4 @@
 .pyproject
 venv
 .cache
+.tox/

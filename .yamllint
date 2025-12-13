@@ -4,3 +4,6 @@ extends: default
 rules:
   line-length:
     level: warning
+
+ignore:
+  - /.tox/
